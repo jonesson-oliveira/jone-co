@@ -1,3 +1,9 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
 # MazyOS — Sistema operacional do negócio
 
 Sua empresa roda em cima desse arquivo. Aqui ficam as regras de operação
@@ -6,6 +12,48 @@ tudo atualizado e cria skills novas conforme a operação evolui.
 
 Esse arquivo é editável. Quando o `/instalar` rodar, ele complementa o
 final dessa página com as regras específicas do seu negócio.
+
+---
+
+## Arquitetura do sistema
+
+MazyOS é um sistema operacional de negócio construído sobre três camadas:
+
+**Memória** (`_memoria/`, `identidade/`) — contexto persistente do negócio.
+Lido a cada sessão. Alimentado pelo `/instalar` e atualizado pelo `/atualizar`.
+
+**Skills** (`.claude/skills/*/SKILL.md`) — workflows isolados e documentados.
+Cada arquivo tem frontmatter `name` + `description` que o Claude usa para
+decidir qual skill invocar. Skills criadas por `/mapear-rotinas` ficam aqui.
+
+**Saídas** (`marketing/`, `saidas/`, `dados/`) — onde cada skill deposita
+seus resultados. Seguir a convenção de nomes `<tipo>-<tema>-<YYYY-MM-DD>/`.
+
+Skills disponíveis: `/instalar` `/abrir` `/salvar` `/atualizar`
+`/novo-projeto` `/mapear-rotinas` `/carrossel` `/publicar-tema` `/seo`
+`/anuncio-google` `/relatorio-ads` `/responder-avaliacoes` `/analisar-dados`
+`/email-profissional` `/aprovar-post`
+
+---
+
+## Setup e dependências opcionais
+
+O sistema funciona sem instalação. Para funcionalidades avançadas:
+
+```bash
+# Renderizar carrosséis como PNG
+npm install playwright && npx playwright install chromium
+
+# Postar no Instagram/Facebook e gerar imagens com IA
+# Criar .env na raiz com:
+# OPENAI_API_KEY=sk-...
+# META_PAGE_ACCESS_TOKEN=...
+# META_PAGE_ID=...
+# META_IG_USER_ID=...
+# SITE_URL=https://seudominio.com
+```
+
+Não há build, lint nem test suite — o sistema é baseado em texto e Markdown.
 
 ---
 
