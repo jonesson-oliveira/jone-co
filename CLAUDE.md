@@ -161,3 +161,38 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+## Jone&Co — contexto do negócio (perfil solopreneur)
+
+> Seção gerada pelo `/instalar`. Editar quando o negócio evoluir.
+
+**O que é esse workspace:** Operação da Jone&Co — consultoria de Marketing Digital e IA on demand. Aqui produz conteúdo, constrói o site, gerencia campanhas e documenta clientes.
+
+**Quem sou:** Jonesson Oliveira, 14 anos de Marketing Digital com foco em SEO. Trabalhei em BTG Pactual, Neon, Mercado Bitcoin, C6 Bank e Nio. Agora solo na Jone&Co — entrego marketing e IA sob medida, sem agência no meio.
+
+**O que produzo:**
+- Conteúdo de SEO e marketing digital (carrosséis, artigos, posts)
+- Sites e landing pages para clientes e para a própria marca
+- Automações e IA customizada para negócios
+- Estratégia de SEO e GEO (busca orgânica e presença em IA)
+
+**Minha audiência:** Profissionais de marketing, founders e empresas que precisam de marketing e IA sem montar um time inteiro.
+
+**Tom de voz:** Direto, técnico na medida certa, informal sem ser descuidado. Toma partido. Humor seco quando cabe. Ver `_memoria/preferencias.md` pra lista completa do que evitar.
+
+**Posicionamento:** Um sênior que entrega o que uma agência entregaria — sem o overhead, sem o jogo de telefone. Marketing & IA construídos pra funcionar no negócio do cliente.
+
+**Estrutura de pastas:**
+- `_memoria/` — quem sou, como falo, o que tá em foco
+- `identidade/` — cores, fontes, logo, padrão visual (style tile Signal Studio)
+- `marketing/` — conteúdo, SEO, campanhas (saída das skills)
+- `saidas/` — análises, emails, documentos pontuais
+- `dados/` — arquivos a analisar (CSV, PDF, planilha)
+- `scripts/` — utilitários (gerar imagem, postar, render)
+
+**Regras do sistema:**
+- Conteúdo novo salvar em `marketing/conteudo/<tipo>-<tema>-<data>/`
+- Cada cliente novo cria pasta em `saidas/<nome-cliente>/`
+- Logo e favicon ficam em `identidade/` (colocar os arquivos quando disponível)
