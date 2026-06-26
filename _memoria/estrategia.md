@@ -2,16 +2,29 @@
 
 ## Fase
 
-Zero a um — construindo as bases do negócio. Ainda sem site, sem presença digital própria como Jone&Co.
+Site no ar. Próxima fase: conteúdo, SEO e prospecção ativa.
+
+## Site (joneandco.com.br)
+
+Implementado e deployado. Cloudflare Workers + Hono, TypeScript SSR.
+Projeto em: `c:\Users\jones\OneDrive\Documentos\ProjetosClaude\JoneAndCo-Site`
+Contexto técnico completo em `JoneAndCo-Site/CLAUDE.md`.
+
+**Páginas entregues:** Home, /sobre, /servicos, /contato, 4 LPs de serviço, blog (infra), políticas
+**CTAs:** todos primários vão para WhatsApp (5511977931934)
+**Identidade:** tokens lime/violet, fontes Inter + JetBrains Mono + Fraunces
 
 ## Prioridade principal
 
-Lançar o site da Jone&Co e começar a prospecção ativa de clientes.
+Gerar primeiros clientes. O desbloqueador do site foi resolvido.
+
+## Próximos passos do site
+
+- Foto em `public/img/jonesson.jpg` (placeholder ativo em /sobre e 4 LPs)
+- Primeiro post do blog
+- Calendly link
+- og:image por LP
 
 ## O que pode esperar
 
-Qualquer coisa que não seja site + prospecção. Nessa fase, o foco é existir digitalmente antes de escalar.
-
-## Contexto com prazo
-
-Sem prazo fixo definido. A construção do site é o desbloqueador principal — tudo o que vier depois depende dele.
+Qualquer coisa que não seja prospecção, conteúdo e SEO.
