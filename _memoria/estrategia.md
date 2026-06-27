@@ -20,6 +20,9 @@ Gerar primeiros clientes. O desbloqueador do site foi resolvido.
 
 ## Próximos passos do site
 
+**Entregue:** meta robots, X-Robots-Tag, hreflang, datas OG, sitemap (dedup), llms.txt (Markdown), GTM-N5Z5XJ9H, preload CSS, contraste WCAG, CLS hero-mark, h4→p footer
+
+**Pendente:**
 - Foto em `public/img/jonesson.jpg` (placeholder ativo em /sobre e 4 LPs)
 - Primeiro post do blog
 - Calendly link
