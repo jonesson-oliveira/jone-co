@@ -7,6 +7,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --lime: #C6F24B;
+    --violet: #7C5CFF;
+    --surface: #1B222C;
+    --surface-2: #161C24;
+    --dark: #0E1116;
+    --bone: #F2EFE9;
+    --text: #E8ECF1;
+    --muted: #8A93A0;
+    --stone: #6B6258;
+    --ink: #1A1714;
+    --line: #2A323D;
+    --red: #f87171;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #444; }
 
@@ -19,26 +33,26 @@
     margin-bottom: 40px;
   }
 
-  .bg-dark   { background: #0E1116; }
-  .bg-bone   { background: #F2EFE9; }
-  .bg-accent { background: #C6F24B; }
+  .bg-dark   { background: var(--dark); }
+  .bg-accent { background: var(--lime); }
+  .bg-bone   { background: var(--bone); }
 
-  /* textura de grão, aplicada em todos os slides */
   .grain {
     position: absolute; inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    opacity: 0.05;
+    opacity: 0.06;
     mix-blend-mode: overlay;
     pointer-events: none;
   }
-
-  /* glow radial, atrás de elementos centrais */
-  .glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
+  .scanlines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 3px);
     pointer-events: none;
   }
+  .scanlines.on-dark { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px); }
+
+  .ghost-amp { position: absolute; z-index: 1; pointer-events: none; }
+  .amp-inline { height: 0.75em; width: auto; vertical-align: -0.06em; margin: 0 1px; }
 
   .logo { position: absolute; top: 56px; left: 70px; height: 34px; z-index: 3; }
   .counter {
@@ -46,176 +60,125 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 15px; font-weight: 600; letter-spacing: 0.18em;
   }
-  .counter.on-dark   { color: #8A93A0; }
-  .counter.on-bone   { color: #6B6258; }
+  .counter.on-dark   { color: var(--muted); }
   .counter.on-accent { color: rgba(26,23,20,0.55); }
 
   .kicker {
+    position: relative; z-index: 2;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.26em;
-    font-size: 16px;
+    letter-spacing: 0.24em;
+    font-size: 17px;
   }
-  .kicker.on-dark   { color: #C6F24B; }
-  .kicker.on-bone   { color: #7C5CFF; }
-  .kicker.on-accent { color: #1A1714; }
+  .kicker.on-dark   { color: var(--lime); }
+  .kicker.on-accent { color: var(--ink); }
 
-  /* selo/pill pro kicker, dá camada em vez de texto solto */
-  .kicker-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 22px;
-    border-radius: 100px;
-  }
-  .kicker-pill.on-dark   { background: rgba(198,242,75,0.12); border: 1px solid rgba(198,242,75,0.35); }
-  .kicker-pill.on-accent { background: rgba(26,23,20,0.1); border: 1px solid rgba(26,23,20,0.25); }
-
-  .regua { height: 4px; width: 72px; margin: 24px 0 30px; }
-  .regua.on-dark   { background: #C6F24B; }
-  .regua.on-bone   { background: #7C5CFF; }
-  .regua.on-accent { background: #1A1714; }
+  .regua { position: relative; z-index: 2; height: 4px; width: 72px; margin: 22px 0 34px; }
+  .regua.on-dark   { background: var(--lime); }
+  .regua.on-accent { background: var(--ink); }
 
   .content { position: absolute; left: 70px; right: 70px; z-index: 2; }
-
-  /* card em formato blob, assimétrico, pra título sair do "retângulo chapado" */
-  .blob-card {
-    background: #C6F24B;
-    border-radius: 64px 24px 64px 24px;
-    padding: 56px 60px;
-    display: inline-block;
-    max-width: 880px;
-  }
 
   h1.title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    font-size: 84px;
-    line-height: 0.94;
-    letter-spacing: -0.035em;
-    color: #1A1714;
+    font-size: 76px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--text);
   }
-
-  .subtitle {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.4;
-    margin-top: 34px;
-    max-width: 720px;
-  }
-  .subtitle.on-dark { color: #8A93A0; }
-
-  .handle {
-    position: absolute; bottom: 70px; left: 70px; z-index: 3;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600; font-size: 22px;
-  }
-  .handle.on-dark   { color: #E8ECF1; }
-  .handle.on-accent { color: #1A1714; }
 
   h2.h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    font-size: 72px;
+    font-size: 60px;
     line-height: 1.0;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
   }
-  .h2.on-bone { color: #1A1714; }
+  .h2.on-dark   { color: var(--text); }
+  .h2.on-accent { color: var(--ink); }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.4;
+    margin-top: 36px;
+    max-width: 720px;
+  }
+  .subtitle.on-dark   { color: var(--muted); }
+  .subtitle.on-accent { color: rgba(26,23,20,0.72); }
 
   .body-text {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 27px;
-    line-height: 1.55;
-    margin-top: 32px;
+    font-size: 25px;
+    line-height: 1.5;
+    margin-top: 28px;
     max-width: 860px;
   }
-  .body-text.on-bone   { color: #6B6258; }
-  .body-text.on-accent { color: rgba(26,23,20,0.75); }
-  .body-text .hl-violet { color: #7C5CFF; font-weight: 700; }
-  .body-text .hl-ink    { color: #1A1714; font-weight: 700; }
+  .body-text.on-dark   { color: var(--muted); }
+  .body-text.on-accent { color: rgba(26,23,20,0.72); }
+  .hl-lime   { color: var(--lime); font-weight: 700; }
+  .hl-violet { color: var(--violet); font-weight: 700; }
 
-  /* ampersand gigante como textura de fundo, não como logo */
-  .amp-bg {
-    position: absolute;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 500;
-    color: #7C5CFF;
-    opacity: 0.08;
-    line-height: 1;
-    pointer-events: none;
+  .footer-bar {
+    position: absolute; bottom: 64px; left: 70px; right: 70px; z-index: 3;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
+  .footer-bar.on-dark   { color: var(--text); }
+  .footer-bar.on-accent { color: var(--ink); }
 
-  .numeral-wrap { position: relative; }
+  .dots {
+    position: absolute; bottom: 110px; left: 0; right: 0; z-index: 3;
+    display: flex; justify-content: center; gap: 10px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.on-dark   { background: rgba(255,255,255,0.22); }
+  .dot.on-dark.active   { background: var(--lime); }
+  .dot.on-accent { background: rgba(26,23,20,0.22); }
+  .dot.on-accent.active { background: var(--ink); }
+
+  .proof-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-top: 56px;
+    margin-bottom: 22px;
+  }
+  .proof-label.on-accent { color: rgba(26,23,20,0.55); }
+  .proof-logos { display: flex; align-items: center; gap: 44px; flex-wrap: wrap; }
+  .proof-logos.on-accent img { height: 30px; width: auto; filter: grayscale(1) brightness(0); opacity: 0.45; }
+
   .numeral {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
     font-size: 340px;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: #1A1714;
-    transform: rotate(-4deg);
-    display: inline-block;
+    line-height: 0.85;
+    color: var(--lime);
+    letter-spacing: -0.02em;
   }
 
-  .quote-mark {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 260px;
-    color: rgba(198,242,75,0.14);
-    position: absolute;
-    top: 110px; left: 50px;
-    line-height: 1;
-    z-index: 1;
-  }
   .quote-text {
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
     font-size: 58px;
-    line-height: 1.25;
-    color: #E8ECF1;
+    line-height: 1.28;
   }
-  .quote-attr {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 22px;
-    color: #8A93A0;
-    margin-top: 42px;
-  }
+  .quote-text.on-bone { color: var(--ink); }
+  .quote-attr { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 22px; margin-top: 40px; }
+  .quote-attr.on-bone { color: var(--stone); }
 
-  .cta-logo { display: block; height: 68px; margin: 0 auto; position: relative; z-index: 2; }
-  .cta-headline {
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: 74px;
-    letter-spacing: -0.035em;
-    color: #1A1714;
-    text-align: center;
-    margin-top: 50px;
-    position: relative; z-index: 2;
-  }
-  .cta-handle-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 28px auto 0;
-    padding: 14px 30px;
-    background: #1A1714;
-    border-radius: 100px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    color: #C6F24B;
-    position: relative; z-index: 2;
-  }
-  .center-box {
-    position: absolute; left: 0; right: 0; top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-  }
+  .signature { display: flex; align-items: center; gap: 22px; }
+  .signature-list { display: flex; flex-direction: column; gap: 8px; }
+  .signature-list p { font-family: 'Space Grotesk', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: -0.01em; }
 </style>
 </head>
 <body>
@@ -223,77 +186,106 @@
 <!-- SLIDE 1 — CAPA -->
 <div class="slide bg-dark">
   <div class="grain"></div>
-  <div class="glow" style="width:640px; height:640px; top:-180px; left:520px; background:rgba(198,242,75,0.20);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
+  <div class="scanlines on-dark"></div>
+  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="top:-160px; right:-120px; height:900px; width:auto; opacity:0.07;" alt="">
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
   <div class="counter on-dark">01/05</div>
-  <div class="content" style="top: 400px;">
-    <div class="blob-card">
-      <div class="kicker on-accent">JONE&amp;CO</div>
-      <div class="regua on-accent"></div>
-      <h1 class="title">14 anos de SEO.<br>Zero papo de agência.</h1>
-    </div>
+  <div class="content" style="top: 480px;">
+    <div class="kicker on-dark">&#9492; JONE&amp;CO</div>
+    <div class="regua on-dark"></div>
+    <h1 class="title">14 anos de SEO.<br>Zero papo de<br>agência.</h1>
     <div class="subtitle on-dark">Marketing &amp; IA sob medida, sem intermediário</div>
   </div>
-  <div class="handle on-dark">@jone.andco</div>
+  <div class="dots">
+    <div class="dot on-dark active"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
 <!-- SLIDE 2 — QUEM SOU -->
-<div class="slide bg-bone">
+<div class="slide bg-accent">
   <div class="grain"></div>
-  <div class="amp-bg" style="font-size:900px; top:-160px; right:-260px;">&amp;</div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
-  <div class="counter on-bone">02/05</div>
-  <div class="content" style="top: 460px;">
-    <div class="kicker-pill on-dark" style="background:rgba(124,92,255,0.1); border:1px solid rgba(124,92,255,0.3);">
-      <span class="kicker on-bone">QUEM SOU</span>
+  <div class="scanlines"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
+  <div class="counter on-accent">02/05</div>
+  <div class="content" style="top: 300px;">
+    <div class="kicker on-accent">&#9492; QUEM SOU</div>
+    <div class="regua on-accent"></div>
+    <h2 class="h2 on-accent">Jonesson<br>Oliveira</h2>
+    <div class="body-text on-accent">14 anos de marketing digital, sempre com o pé no SEO. Vi de perto o que faz um negócio ser encontrado <span class="hl-violet">(e o que é só modinha de LinkedIn)</span>.</div>
+    <div class="proof-label on-accent">&#9492; passagem por</div>
+    <div class="proof-logos on-accent">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-btg-pactual.svg" alt="BTG Pactual">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-neon.svg" alt="Neon">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-c6-bank.svg" alt="C6 Bank">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-mercado-bitcoin.svg" alt="Mercado Bitcoin">
     </div>
-    <div class="regua on-bone"></div>
-    <h2 class="h2 on-bone">Jonesson Oliveira</h2>
-    <div class="body-text on-bone">14 anos de marketing digital, sempre com o pé no <span class="hl-violet">SEO</span>. Passei por BTG Pactual, Neon, C6 Bank e Mercado Bitcoin. Vi de perto o que faz um negócio ser encontrado (e o que é só <span class="hl-violet">modinha de LinkedIn</span>).</div>
   </div>
+  <div class="dots">
+    <div class="dot on-accent"></div><div class="dot on-accent active"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div>
+  </div>
+  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
 <!-- SLIDE 3 — NÚMERO -->
-<div class="slide bg-accent">
+<div class="slide bg-dark">
   <div class="grain"></div>
-  <div class="glow" style="width:700px; height:700px; top:200px; left:-220px; background:rgba(26,23,20,0.14);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
-  <div class="counter on-accent">03/05</div>
+  <div class="scanlines on-dark"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
+  <div class="counter on-dark">03/05</div>
   <div class="content" style="top: 300px;">
-    <div class="kicker-pill on-accent">
-      <span class="kicker on-accent">ANOS DE ESTRADA</span>
-    </div>
-    <div class="numeral-wrap">
-      <div class="numeral">14</div>
-    </div>
-    <div class="body-text on-accent">Tempo suficiente pra separar o que gera <span class="hl-ink">resultado</span> do que é só brainstorm bonito de agência.</div>
+    <div class="kicker on-dark">&#9492; ANOS DE ESTRADA</div>
+    <div class="numeral" style="margin-top:14px;">14</div>
+    <div class="body-text on-dark" style="margin-top:40px;">Tempo suficiente pra separar o que gera resultado do que é <span class="hl-lime">só brainstorm bonito de agência</span>.</div>
   </div>
+  <div class="dots">
+    <div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
 <!-- SLIDE 4 — CITAÇÃO -->
-<div class="slide bg-dark">
+<div class="slide bg-bone">
   <div class="grain"></div>
-  <div class="glow" style="width:600px; height:600px; bottom:-160px; right:-160px; background:rgba(198,242,75,0.14);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
-  <div class="counter on-dark">04/05</div>
-  <div class="quote-mark">&ldquo;</div>
+  <div class="scanlines"></div>
+  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="bottom:-200px; right:-110px; height:780px; width:auto; filter:brightness(0); opacity:0.06;" alt="">
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
+  <div class="counter on-accent">04/05</div>
   <div class="content" style="top: 520px;">
-    <div class="quote-text">Agência vende processo.<br><span style="color:#C6F24B;">Eu entrego resultado, direto.</span></div>
-    <div class="quote-attr">Jonesson, Jone&amp;Co</div>
+    <div class="kicker on-accent">&#9492; NA PRÁTICA</div>
+    <div class="regua on-accent"></div>
+    <div class="quote-text on-bone">&ldquo;Agência vende processo. <span class="hl-violet">Eu entrego resultado, direto.</span>&rdquo;</div>
+    <div class="quote-attr on-bone">— Jonesson, Jone&amp;Co</div>
   </div>
+  <div class="dots">
+    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div><div class="dot on-accent"></div>
+  </div>
+  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
 <!-- SLIDE 5 — CTA FINAL -->
 <div class="slide bg-accent">
   <div class="grain"></div>
-  <div class="glow" style="width:760px; height:760px; top:-260px; left:160px; background:rgba(26,23,20,0.10);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="scanlines"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
   <div class="counter on-accent">05/05</div>
-  <div class="center-box">
-    <img class="cta-logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
-    <div class="cta-headline">Bora conversar?</div>
-    <div class="cta-handle-pill">@jone.andco</div>
+  <div style="position:absolute; left:0; right:0; top:310px; text-align:center; z-index:2;">
+    <div class="kicker on-accent" style="justify-content:center; display:flex;">&#9492; JONE&amp;CO</div>
+    <div style="font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:84px; letter-spacing:-0.045em; text-transform:uppercase; color:var(--ink); margin-top:26px;">Bora conversar?</div>
+    <div style="display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:16px 34px; background:var(--ink); border-radius:100px; font-family:'JetBrains Mono', monospace; font-weight:600; font-size:22px; letter-spacing:0.05em; color:var(--lime);">@jone.andco</div>
   </div>
+  <div class="signature" style="position:absolute; left:70px; right:70px; top:940px; z-index:2;">
+    <img src="../../../identidade/JoneAndCo-mark-lime.svg" style="height:104px; width:auto; filter:brightness(0); flex-shrink:0;" alt="&amp;">
+    <div class="signature-list" style="color:var(--ink);">
+      <p>criatividade <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> desenvolvimento</p>
+      <p>marketing <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> IA</p>
+      <p>estratégia <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> inovação</p>
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div>
+  </div>
+  <div class="footer-bar on-accent"><span>joneandco.com.br</span><span>2026</span></div>
 </div>
 
 </body>

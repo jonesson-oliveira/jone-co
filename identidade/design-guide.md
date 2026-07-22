@@ -75,6 +75,26 @@ Dark-first com superfície bone pra conteúdo longo e portfólio. O lime elétri
 
 ---
 
+## Estilo de carrossel (Instagram) — v2, aprovado 2026-07-22
+
+Referência: perfil @sabec.dev + componentes reais do site (`JoneAndCo-Site/src/routes/frontend/custom-ai-lp.ts`).
+Substitui qualquer versão anterior de carrossel (a v1, com "blob-card" arredondado tipo balão de fala, foi rejeitada — parecia template genérico).
+
+- **Kicker:** sempre com prefixo `└` antes do texto (ex: "└ JONE&CO"), JetBrains Mono, uppercase, letter-spacing 0.22-0.26em
+- **Título:** UPPERCASE, Space Grotesk peso 800, letter-spacing -0.045em, sem card/bolha por trás — texto direto no fundo
+- **Elemento gráfico gigante:** usar o arquivo `identidade/JoneAndCo-mark-lime.svg` (a marca isolada de verdade, não o glifo "&" de nenhuma fonte) enorme e translúcido (~8-10% opacidade), sangrando pra fora da borda — no lugar de foto/clip-art nas capas. Em fundo escuro, usar direto (já é lime). Em fundo claro/accent, aplicar `filter:brightness(0)` pra virar tinta escura antes de baixar a opacidade. Não usar números genéricos tipo o Sabec usa; usar sempre esse arquivo (é o device da própria marca)
+- **"&" em qualquer lugar do design** (marca d'água, assinatura, "&" solto entre palavras) sempre usa esse mesmo arquivo `JoneAndCo-mark-lime.svg`, nunca texto com fonte — mesma regra do `filter:brightness(0)` pra inverter cor conforme o fundo
+- **Assinatura de fechamento (slide final):** reaproveitar o rodapé real do site (`footer-amp-big` + `footer-taglines-list` em `JoneAndCo-Site/public/css/site.css`) — marca grande + 3 linhas "criatividade & desenvolvimento / marketing & IA / estratégia & inovação", Space Grotesk 600 nas linhas
+- **Prova/autoridade:** quando fizer sentido (slide de citação, prova social), usar os logos reais dos clientes em `JoneAndCo-Site/public/img/logos/` (BTG Pactual, Neon, Mercado Bitcoin, C6 Bank, Nio) com `filter: grayscale(1) brightness(0) invert(1); opacity: 0.4` em fundo escuro — nunca inventar prova, só usar o que é real
+- **Mockup de produto/interface:** pelo menos 1-2 slides internos devem usar um mockup real de UI (terminal com abas, card antes/depois, chat) em vez de só texto solto. Reaproveitar os componentes já existentes no site institucional em vez de inventar novos:
+  - `.lp-terminal` + `.lp-tabs` + `.lp-tab-dot--red`/`--lime` — janela com abas pra contraste "antes/depois" (ex: "Com agência" vs "Comigo")
+  - `.lp-panel` + `.lp-before-line` (texto com strikethrough, pra lista de problemas) + `.lp-boot-line` (linha com seta violeta + check lime, pra lista de acertos)
+  - `.lp-ba-card--before` (fundo branco, header vermelho) / `.lp-ba-card--after` (fundo `#0E1116`, header lime) — cards antes/depois lado a lado
+  - Tokens exatos: `--surface: #1B222C`, `--surface-2: #161C24`, `--line: #2A323D`, `--muted: #8A93A0`, vermelho `#f87171` pro "antes"
+- **Textura:** grain sutil (opacity ~0.05-0.06) sempre; scanlines finas opcionais pra reforçar o ar técnico
+- **Rodapé:** handle embaixo à esquerda + "Arraste →" (ou ano) embaixo à direita + bolinhas de paginação centralizadas acima do rodapé
+- **Nunca:** card com border-radius assimétrico tipo balão de fala, gradiente nebuloso/borrado como elemento decorativo solto, clip-art genérico
+
 ## Observações adicionais
 
 Style tile criado pela Signal Studio. Fonte do arquivo: `JoneAndCo-style-tile_3.html`.

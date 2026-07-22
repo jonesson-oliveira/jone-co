@@ -39,7 +39,8 @@ Conta separada da pessoal — chefe e colegas da Nio seguem a pessoal, e a Jone&
 
 **Pendente:**
 - Foto de perfil (mesma da pendência do site)
-- 3-4 posts prontos antes do primeiro publicado
+
+**Feito (2026-07-22):** 4 carrosséis prontos em `marketing/conteudo/` (posicionamento, apresentação, mito-seo, geo-ia) — resolve a pendência de "3-4 posts prontos". Todos no padrão visual v2 (ver `identidade/design-guide.md` — kicker "└", marca `mark-lime.svg` como device gráfico, mockups de terminal/UI reaproveitados do site, logos reais de clientes como prova). Gerados via HTML/Playwright, não Canva.
 
 ## O que pode esperar
 

@@ -9,7 +9,8 @@ const fs = require('fs');
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
   await page.goto('file://' + path.resolve(__dirname, 'carrossel.html'));
-  await page.waitForTimeout(400);
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(150);
 
   const slides = await page.$$('.slide');
   for (let i = 0; i < slides.length; i++) {

@@ -6,7 +6,7 @@
 **Perfil:** Jonesson Oliveira, Especialista de Marketing Digital com 14 anos de experiência, atuação principal em SEO em grandes empresas (BTG Pactual, Neon, Mercado Bitcoin, C6 Bank, Nio)
 **Atende clientes:** Pequenos e grandes negócios sem nicho definido — já atendeu de e-commerces a plataformas de terapia holística
 **Equipe:** Solo (Jonesson toca tudo)
-**Ferramentas:**
+**Ferramentas:** Playwright (renderiza os carrosséis em HTML/CSS → PNG — testado e é o caminho confiável, não precisa de Canva pra isso); design system do site institucional (`JoneAndCo-Site`) reaproveitado como base visual do conteúdo (cores, fontes, componentes de mockup)
 **Principais entregas:** Marketing & IA on demand — sites e landing pages, conteúdo e social, SEO/GEO, AI customizado
 
 ## Contexto adicional

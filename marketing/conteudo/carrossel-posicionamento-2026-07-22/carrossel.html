@@ -7,6 +7,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --lime: #C6F24B;
+    --violet: #7C5CFF;
+    --surface: #1B222C;
+    --surface-2: #161C24;
+    --dark: #0E1116;
+    --text: #E8ECF1;
+    --muted: #8A93A0;
+    --ink: #1A1714;
+    --line: #2A323D;
+    --red: #f87171;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #444; }
 
@@ -19,24 +31,29 @@
     margin-bottom: 40px;
   }
 
-  .bg-dark   { background: #0E1116; }
-  .bg-bone   { background: #F2EFE9; }
-  .bg-accent { background: #C6F24B; }
+  .bg-dark   { background: var(--dark); }
+  .bg-accent { background: var(--lime); }
 
   .grain {
     position: absolute; inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    opacity: 0.05;
+    opacity: 0.06;
     mix-blend-mode: overlay;
     pointer-events: none;
   }
-
-  .glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
+  .scanlines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0px, rgba(0,0,0,0.06) 1px, transparent 1px, transparent 3px);
     pointer-events: none;
   }
+  .scanlines.on-dark { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 3px); }
+
+  .ghost-amp {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .amp-inline { height: 0.75em; width: auto; vertical-align: -0.06em; margin: 0 1px; }
 
   .logo { position: absolute; top: 56px; left: 70px; height: 34px; z-index: 3; }
   .counter {
@@ -44,150 +61,188 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 15px; font-weight: 600; letter-spacing: 0.18em;
   }
-  .counter.on-dark   { color: #8A93A0; }
+  .counter.on-dark   { color: var(--muted); }
   .counter.on-accent { color: rgba(26,23,20,0.55); }
 
   .kicker {
+    position: relative; z-index: 2;
     font-family: 'JetBrains Mono', monospace;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.26em;
-    font-size: 16px;
+    letter-spacing: 0.24em;
+    font-size: 17px;
   }
-  .kicker.on-dark   { color: #C6F24B; }
-  .kicker.on-accent { color: #1A1714; }
-  .kicker.lime-on-ink { color: #C6F24B; }
+  .kicker.on-dark   { color: var(--lime); }
+  .kicker.on-accent { color: var(--ink); }
 
-  .kicker-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 10px 22px;
-    border-radius: 100px;
-  }
-  .kicker-pill.on-dark   { background: rgba(198,242,75,0.12); border: 1px solid rgba(198,242,75,0.35); }
-  .kicker-pill.on-accent { background: rgba(26,23,20,0.1); border: 1px solid rgba(26,23,20,0.25); }
-
-  .regua { height: 4px; width: 72px; margin: 24px 0 30px; }
-  .regua.on-dark   { background: #C6F24B; }
-  .regua.on-accent { background: #1A1714; }
-  .regua.lime-on-ink { background: #C6F24B; }
+  .regua { position: relative; z-index: 2; height: 4px; width: 72px; margin: 22px 0 34px; }
+  .regua.on-dark   { background: var(--lime); }
+  .regua.on-accent { background: var(--ink); }
 
   .content { position: absolute; left: 70px; right: 70px; z-index: 2; }
-
-  /* blob-card invertido: fundo ink, pra usar sobre capa lime */
-  .blob-card-ink {
-    background: #1A1714;
-    border-radius: 24px 64px 24px 64px;
-    padding: 56px 60px;
-    display: inline-block;
-    max-width: 880px;
-  }
 
   h1.title {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    font-size: 72px;
-    line-height: 1.0;
-    letter-spacing: -0.035em;
-    color: #F2EFE9;
+    font-size: 84px;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-transform: uppercase;
+    color: var(--ink);
   }
-
-  .subtitle {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 30px;
-    line-height: 1.4;
-    margin-top: 34px;
-    max-width: 720px;
-  }
-  .subtitle.on-accent { color: rgba(26,23,20,0.7); }
-
-  .handle {
-    position: absolute; bottom: 70px; left: 70px; z-index: 3;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600; font-size: 22px;
-  }
-  .handle.on-dark   { color: #E8ECF1; }
-  .handle.on-accent { color: #1A1714; }
 
   h2.h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 800;
-    font-size: 68px;
-    line-height: 1.02;
-    letter-spacing: -0.035em;
+    font-size: 60px;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
   }
-  .h2.on-dark   { color: #E8ECF1; }
-  .h2.on-accent { color: #1A1714; }
+  .h2.on-dark { color: var(--text); }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.4;
+    margin-top: 36px;
+    max-width: 720px;
+    color: rgba(26,23,20,0.72);
+  }
 
   .body-text {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 27px;
-    line-height: 1.55;
-    margin-top: 32px;
+    font-size: 25px;
+    line-height: 1.5;
+    margin-top: 28px;
     max-width: 860px;
+    color: var(--muted);
   }
-  .body-text.on-dark   { color: #8A93A0; }
-  .body-text.on-accent { color: rgba(26,23,20,0.75); }
-  .hl-lime { color: #C6F24B; font-weight: 700; }
-  .hl-ink  { color: #1A1714; font-weight: 700; }
+  .hl-lime { color: var(--lime); font-weight: 700; }
 
-  .quote-mark {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 260px;
-    color: rgba(198,242,75,0.14);
-    position: absolute;
-    top: 110px; left: 50px;
-    line-height: 1;
-    z-index: 1;
+  .footer-bar {
+    position: absolute; bottom: 64px; left: 70px; right: 70px; z-index: 3;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
+  .footer-bar.on-dark   { color: var(--text); }
+  .footer-bar.on-accent { color: var(--ink); }
+
+  .dots {
+    position: absolute; bottom: 110px; left: 0; right: 0; z-index: 3;
+    display: flex; justify-content: center; gap: 10px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .dot.on-dark   { background: rgba(255,255,255,0.22); }
+  .dot.on-dark.active   { background: var(--lime); }
+  .dot.on-accent { background: rgba(26,23,20,0.22); }
+  .dot.on-accent.active { background: var(--ink); }
+
+  /* ---- Terminal mockup (reaproveitado do site) ---- */
+  .terminal {
+    position: relative; z-index: 2;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(124,92,255,0.13);
+  }
+  .terminal-tabs {
+    display: flex;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    padding: 0 6px;
+  }
+  .terminal-tab {
+    display: flex; align-items: center; gap: 9px;
+    padding: 18px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+  }
+  .terminal-tab.is-active { color: var(--text); }
+  .terminal-tab.is-active.red   { border-bottom-color: var(--red); color: #ffb3ab; }
+  .terminal-tab.is-active.lime  { border-bottom-color: var(--lime); }
+  .tab-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .tab-dot.red  { background: var(--red); }
+  .tab-dot.lime { background: var(--lime); }
+
+  .terminal-panel { padding: 34px 38px 38px; }
+  .panel-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .panel-label.red  { color: var(--red); }
+  .panel-label.lime { color: var(--lime); }
+
+  .before-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    color: rgba(138,147,160,0.65);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(42,50,61,0.6);
+    text-decoration: line-through;
+    text-decoration-color: rgba(248,113,113,0.35);
+  }
+  .before-line:last-child { border-bottom: none; }
+
+  .boot-line {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+  }
+  .boot-line:last-child { border-bottom: none; }
+  .boot-arrow { color: var(--violet); flex-shrink: 0; }
+  .boot-text  { color: var(--text); }
+  .boot-ok    { color: var(--lime); flex-shrink: 0; margin-left: auto; }
+
   .quote-text {
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 56px;
+    font-size: 58px;
     line-height: 1.28;
-    color: #E8ECF1;
+    color: var(--text);
   }
   .quote-attr {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 22px;
-    color: #8A93A0;
-    margin-top: 42px;
+    color: var(--muted);
+    margin-top: 40px;
+  }
+  .proof-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 64px;
+    margin-bottom: 22px;
+  }
+  .proof-logos { display: flex; align-items: center; gap: 44px; flex-wrap: wrap; }
+  .proof-logos img {
+    height: 32px; width: auto;
+    filter: grayscale(1) brightness(0) invert(1);
+    opacity: 0.4;
   }
 
-  .cta-headline {
+  /* ---- Assinatura (footer do site) ---- */
+  .signature { display: flex; align-items: center; gap: 22px; }
+  .signature-list { display: flex; flex-direction: column; gap: 8px; }
+  .signature-list p {
     font-family: 'Space Grotesk', sans-serif;
-    font-weight: 800;
-    font-size: 74px;
-    letter-spacing: -0.035em;
-    color: #1A1714;
-    text-align: center;
-    margin-top: 50px;
-    position: relative; z-index: 2;
-  }
-  .cta-handle-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 28px auto 0;
-    padding: 14px 30px;
-    background: #1A1714;
-    border-radius: 100px;
-    font-family: 'Inter', sans-serif;
+    font-size: 23px;
     font-weight: 600;
-    font-size: 24px;
-    color: #C6F24B;
-    position: relative; z-index: 2;
-  }
-  .cta-logo { display: block; height: 68px; margin: 0 auto; position: relative; z-index: 2; }
-  .center-box {
-    position: absolute; left: 0; right: 0; top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
+    letter-spacing: -0.01em;
   }
 </style>
 </head>
@@ -196,71 +251,158 @@
 <!-- SLIDE 1 — CAPA -->
 <div class="slide bg-accent">
   <div class="grain"></div>
-  <div class="glow" style="width:680px; height:680px; top:-220px; left:-160px; background:rgba(26,23,20,0.10);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="scanlines"></div>
+  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="top:-170px; right:-110px; height:950px; width:auto; filter:brightness(0); opacity:0.09;" alt="">
+
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
   <div class="counter on-accent">01/05</div>
-  <div class="content" style="top: 380px;">
-    <div class="blob-card-ink">
-      <div class="kicker lime-on-ink">JONE&amp;CO</div>
-      <div class="regua lime-on-ink"></div>
-      <h1 class="title">O que some quando<br>tira a agência do meio</h1>
-    </div>
-    <div class="subtitle on-accent">Spoiler: não é qualidade</div>
+  <div class="content" style="top: 460px;">
+    <div class="kicker on-accent">&#9492; JONE&amp;CO</div>
+    <div class="regua on-accent"></div>
+    <h1 class="title">O que some quando<br>tira a agência<br>do meio</h1>
+    <div class="subtitle">Spoiler: não é qualidade</div>
   </div>
-  <div class="handle on-accent">@jone.andco</div>
+  <div class="dots">
+    <div class="dot on-accent active"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div>
+  </div>
+  <div class="footer-bar on-accent">
+    <span>@jone.andco</span>
+    <span>Arraste &rarr;</span>
+  </div>
 </div>
 
-<!-- SLIDE 2 — COM AGÊNCIA -->
+<!-- SLIDE 2 — TERMINAL: COM AGÊNCIA (tab vermelha ativa) -->
 <div class="slide bg-dark">
   <div class="grain"></div>
-  <div class="glow" style="width:640px; height:640px; bottom:-200px; left:-160px; background:rgba(198,242,75,0.14);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
+  <div class="scanlines on-dark"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
   <div class="counter on-dark">02/05</div>
-  <div class="content" style="top: 460px;">
-    <div class="kicker-pill on-dark"><span class="kicker on-dark">COM AGÊNCIA</span></div>
+  <div class="content" style="top: 210px;">
+    <div class="kicker on-dark">&#9492; O QUE MUDA</div>
     <div class="regua on-dark"></div>
     <h2 class="h2 on-dark">Camada em<br>cima de camada</h2>
-    <div class="body-text on-dark">Reunião de alinhamento. Reunião de aprovação. Reunião pra decidir a próxima reunião. No fim, <span class="hl-lime">quem executa nem estava na sala</span>.</div>
+  </div>
+  <div class="content" style="top: 560px;">
+    <div class="terminal">
+      <div class="terminal-tabs">
+        <div class="terminal-tab is-active red"><span class="tab-dot red"></span>Com agência</div>
+        <div class="terminal-tab"><span class="tab-dot lime"></span>Comigo</div>
+      </div>
+      <div class="terminal-panel">
+        <div class="panel-label red">fila da semana</div>
+        <div class="before-line">Reunião de alinhamento</div>
+        <div class="before-line">Reunião de aprovação</div>
+        <div class="before-line">Reunião pra decidir a próxima reunião</div>
+      </div>
+    </div>
+    <div class="body-text">No fim, <span class="hl-lime">quem executa nem estava na sala</span>.</div>
+  </div>
+  <div class="dots">
+    <div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark">
+    <span>@jone.andco</span>
+    <span>Arraste &rarr;</span>
   </div>
 </div>
 
-<!-- SLIDE 3 — COMIGO -->
-<div class="slide bg-accent">
+<!-- SLIDE 3 — TERMINAL: COMIGO (tab lime ativa) -->
+<div class="slide bg-dark">
   <div class="grain"></div>
-  <div class="glow" style="width:700px; height:700px; top:-220px; right:-180px; background:rgba(26,23,20,0.12);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
-  <div class="counter on-accent">03/05</div>
-  <div class="content" style="top: 460px;">
-    <div class="kicker-pill on-accent"><span class="kicker on-accent">COMIGO</span></div>
-    <div class="regua on-accent"></div>
-    <h2 class="h2 on-accent">Direto com<br>quem faz</h2>
-    <div class="body-text on-accent">Você fala com quem entende do assunto e executa. <span class="hl-ink">Sem camada, sem telefone sem fio</span>, sem duas semanas de atraso pra aprovar um texto.</div>
+  <div class="scanlines on-dark"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
+  <div class="counter on-dark">03/05</div>
+  <div class="content" style="top: 210px;">
+    <div class="kicker on-dark">&#9492; O QUE MUDA</div>
+    <div class="regua on-dark"></div>
+    <h2 class="h2 on-dark">Direto com<br>quem faz</h2>
+  </div>
+  <div class="content" style="top: 560px;">
+    <div class="terminal">
+      <div class="terminal-tabs">
+        <div class="terminal-tab"><span class="tab-dot red"></span>Com agência</div>
+        <div class="terminal-tab is-active lime"><span class="tab-dot lime"></span>Comigo</div>
+      </div>
+      <div class="terminal-panel">
+        <div class="panel-label lime">fila da semana</div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">Você fala direto com quem entende do assunto</span><span class="boot-ok">&#10003;</span></div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">Sem telefone sem fio</span><span class="boot-ok">&#10003;</span></div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">Texto aprovado no mesmo dia</span><span class="boot-ok">&#10003;</span></div>
+      </div>
+    </div>
+    <div class="body-text">Sem camada, sem <span class="hl-lime">duas semanas de atraso</span> pra aprovar um texto.</div>
+  </div>
+  <div class="dots">
+    <div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark">
+    <span>@jone.andco</span>
+    <span>Arraste &rarr;</span>
   </div>
 </div>
 
 <!-- SLIDE 4 — CITAÇÃO -->
 <div class="slide bg-dark">
   <div class="grain"></div>
-  <div class="glow" style="width:600px; height:600px; bottom:-160px; right:-160px; background:rgba(198,242,75,0.14);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
+  <div class="scanlines on-dark"></div>
+  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="bottom:-190px; left:-90px; height:760px; width:auto; opacity:0.08;" alt="">
+
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
   <div class="counter on-dark">04/05</div>
-  <div class="quote-mark">&ldquo;</div>
-  <div class="content" style="top: 520px;">
-    <div class="quote-text">Você não precisa de cinco pessoas<br>pra fazer o trabalho de <span style="color:#C6F24B;">uma que entende do assunto</span>.</div>
-    <div class="quote-attr">Jonesson, Jone&amp;Co</div>
+  <div class="content" style="top: 470px;">
+    <div class="kicker on-dark">&#9492; NA PRÁTICA</div>
+    <div class="regua on-dark"></div>
+    <div class="quote-text">
+      &ldquo;Você não precisa de cinco pessoas pra fazer o trabalho de <span class="hl-lime">uma que entende do assunto</span>.&rdquo;
+    </div>
+    <div class="quote-attr">— Jonesson, Jone&amp;Co</div>
+    <div class="proof-label">&#9492; experiência em</div>
+    <div class="proof-logos">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-btg-pactual.svg" alt="BTG Pactual">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-neon.svg" alt="Neon">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-mercado-bitcoin.svg" alt="Mercado Bitcoin">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-c6-bank.svg" alt="C6 Bank">
+      <img src="../../../../JoneAndCo-Site/public/img/logos/logo-nio.svg" alt="Nio">
+    </div>
+  </div>
+  <div class="dots">
+    <div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark">
+    <span>@jone.andco</span>
+    <span>Arraste &rarr;</span>
   </div>
 </div>
 
 <!-- SLIDE 5 — CTA FINAL -->
 <div class="slide bg-accent">
   <div class="grain"></div>
-  <div class="glow" style="width:760px; height:760px; top:-260px; left:160px; background:rgba(26,23,20,0.10);"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="scanlines"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
   <div class="counter on-accent">05/05</div>
-  <div class="center-box">
-    <img class="cta-logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
-    <div class="cta-headline">Fala comigo</div>
-    <div class="cta-handle-pill">@jone.andco</div>
+
+  <div style="position:absolute; left:0; right:0; top:310px; text-align:center; z-index:2;">
+    <div class="kicker on-accent" style="justify-content:center; display:flex;">&#9492; JONE&amp;CO</div>
+    <div style="font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:84px; letter-spacing:-0.045em; text-transform:uppercase; color:var(--ink); margin-top:26px;">Fala comigo</div>
+    <div style="display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:16px 34px; background:var(--ink); border-radius:100px; font-family:'JetBrains Mono', monospace; font-weight:600; font-size:22px; letter-spacing:0.05em; color:var(--lime);">@jone.andco</div>
+  </div>
+
+  <!-- Assinatura (reaproveitada do rodapé do site) -->
+  <div class="signature" style="position:absolute; left:70px; right:70px; top:940px; z-index:2;">
+    <img src="../../../identidade/JoneAndCo-mark-lime.svg" style="height:104px; width:auto; filter:brightness(0); flex-shrink:0;" alt="&amp;">
+    <div class="signature-list" style="color:var(--ink);">
+      <p>criatividade <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> desenvolvimento</p>
+      <p>marketing <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> IA</p>
+      <p>estratégia <img class="amp-inline" src="../../../identidade/JoneAndCo-mark-lime.svg" style="filter:brightness(0); opacity:0.5;" alt="&amp;"> inovação</p>
+    </div>
+  </div>
+
+  <div class="dots">
+    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div>
+  </div>
+  <div class="footer-bar on-accent">
+    <span>joneandco.com.br</span>
+    <span>2026</span>
   </div>
 </div>
 
