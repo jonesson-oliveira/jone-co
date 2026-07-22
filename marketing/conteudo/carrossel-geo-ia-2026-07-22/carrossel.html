@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Jone&amp;Co — Carrossel GEO/IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #444; }
+
+  .slide {
+    width: 1080px;
+    height: 1350px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 40px;
+  }
+
+  .bg-dark   { background: #0E1116; }
+  .bg-bone   { background: #F2EFE9; }
+  .bg-accent { background: #C6F24B; }
+
+  .grain {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+  }
+
+  .logo { position: absolute; top: 56px; left: 70px; height: 34px; z-index: 3; }
+  .counter {
+    position: absolute; top: 62px; right: 70px; z-index: 3;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 600; letter-spacing: 0.18em;
+  }
+  .counter.on-dark   { color: #8A93A0; }
+  .counter.on-bone   { color: #6B6258; }
+  .counter.on-accent { color: rgba(26,23,20,0.55); }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 16px;
+  }
+  .kicker.on-dark   { color: #C6F24B; }
+  .kicker.on-bone   { color: #7C5CFF; }
+  .kicker.on-accent { color: #1A1714; }
+
+  .kicker-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 100px;
+  }
+  .kicker-pill.on-dark   { background: rgba(198,242,75,0.12); border: 1px solid rgba(198,242,75,0.35); }
+  .kicker-pill.on-bone   { background: rgba(124,92,255,0.1); border: 1px solid rgba(124,92,255,0.3); }
+  .kicker-pill.on-accent { background: rgba(26,23,20,0.1); border: 1px solid rgba(26,23,20,0.25); }
+
+  .regua { height: 4px; width: 72px; margin: 24px 0 30px; }
+  .regua.on-dark   { background: #C6F24B; }
+  .regua.on-bone   { background: #7C5CFF; }
+  .regua.on-accent { background: #1A1714; }
+
+  .content { position: absolute; left: 70px; right: 70px; z-index: 2; }
+
+  .blob-card {
+    background: #C6F24B;
+    border-radius: 64px 24px 64px 24px;
+    padding: 56px 60px;
+    display: inline-block;
+    max-width: 880px;
+  }
+
+  h1.title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 66px;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: #1A1714;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.4;
+    margin-top: 34px;
+    max-width: 720px;
+  }
+  .subtitle.on-bone { color: #6B6258; }
+  .subtitle.on-dark { color: #8A93A0; }
+
+  .handle {
+    position: absolute; bottom: 70px; left: 70px; z-index: 3;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; font-size: 22px;
+  }
+  .handle.on-dark   { color: #E8ECF1; }
+  .handle.on-bone   { color: #1A1714; }
+  .handle.on-accent { color: #1A1714; }
+
+  h2.h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+  .h2.on-dark   { color: #E8ECF1; }
+  .h2.on-bone   { color: #1A1714; }
+  .h2.on-accent { color: #1A1714; }
+
+  .body-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 1.55;
+    margin-top: 32px;
+    max-width: 860px;
+  }
+  .body-text.on-dark   { color: #8A93A0; }
+  .body-text.on-bone   { color: #6B6258; }
+  .body-text.on-accent { color: rgba(26,23,20,0.75); }
+  .hl-lime   { color: #C6F24B; font-weight: 700; }
+  .hl-violet { color: #7C5CFF; font-weight: 700; }
+  .hl-ink    { color: #1A1714; font-weight: 700; }
+
+  .amp-bg {
+    position: absolute;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #7C5CFF;
+    opacity: 0.08;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .cta-headline {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: 74px;
+    letter-spacing: -0.035em;
+    color: #1A1714;
+    text-align: center;
+    margin-top: 50px;
+    position: relative; z-index: 2;
+  }
+  .cta-handle-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 28px auto 0;
+    padding: 14px 30px;
+    background: #1A1714;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    color: #C6F24B;
+    position: relative; z-index: 2;
+  }
+  .cta-logo { display: block; height: 68px; margin: 0 auto; position: relative; z-index: 2; }
+  .center-box {
+    position: absolute; left: 0; right: 0; top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 — CAPA (com foto IA) -->
+<div class="slide bg-dark">
+  <img src="foto-rede-neural.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(1.22) saturate(1.35) brightness(1.08);">
+  <div style="position:absolute; inset:0; background:radial-gradient(ellipse 900px 900px at 50% 30%, transparent 0%, rgba(14,17,22,0.35) 55%, rgba(14,17,22,0.92) 100%);"></div>
+  <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(14,17,22,0.15) 0%, rgba(14,17,22,0.35) 45%, rgba(14,17,22,0.93) 100%);"></div>
+  <div class="glow" style="width:520px; height:520px; top:120px; left:640px; background:rgba(198,242,75,0.30); mix-blend-mode:screen;"></div>
+  <div class="glow" style="width:480px; height:480px; top:260px; left:-140px; background:rgba(124,92,255,0.30); mix-blend-mode:screen;"></div>
+  <div class="grain"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
+  <div class="counter on-dark">01/05</div>
+  <div class="content" style="top: 380px;">
+    <div class="blob-card">
+      <div class="kicker on-accent">JONE&amp;CO</div>
+      <div class="regua on-accent"></div>
+      <h1 class="title">Sua marca aparece quando alguém pergunta pro ChatGPT?</h1>
+    </div>
+    <div class="subtitle on-dark">GEO: o SEO que ninguém tá fazendo ainda</div>
+  </div>
+  <div class="handle on-dark">@jone.andco</div>
+</div>
+
+<!-- SLIDE 2 — O QUE MUDOU -->
+<div class="slide bg-dark">
+  <div class="grain"></div>
+  <div class="glow" style="width:640px; height:640px; top:-200px; right:-160px; background:rgba(198,242,75,0.18);"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&Co">
+  <div class="counter on-dark">02/05</div>
+  <div class="content" style="top: 460px;">
+    <div class="kicker-pill on-dark"><span class="kicker on-dark">O QUE MUDOU</span></div>
+    <div class="regua on-dark"></div>
+    <h2 class="h2 on-dark">Busca virou<br>conversa</h2>
+    <div class="body-text on-dark">Gente não digita mais 5 palavras no Google. Pergunta inteiro pro ChatGPT, Gemini, Perplexity. E essas IAs <span class="hl-lime">decidem sozinhas</span> qual marca citar na resposta.</div>
+  </div>
+</div>
+
+<!-- SLIDE 3 — GEO -->
+<div class="slide bg-accent">
+  <div class="grain"></div>
+  <div class="glow" style="width:700px; height:700px; bottom:-220px; left:-180px; background:rgba(26,23,20,0.12);"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="counter on-accent">03/05</div>
+  <div class="content" style="top: 460px;">
+    <div class="kicker-pill on-accent"><span class="kicker on-accent">GEO</span></div>
+    <div class="regua on-accent"></div>
+    <h2 class="h2 on-accent">SEO pra ser citado,<br>não só clicado</h2>
+    <div class="body-text on-accent">Generative Engine Optimization é otimizar seu conteúdo pra IA entender, confiar e <span class="hl-ink">recomendar sua marca</span> dentro da resposta, não só rankear num link azul.</div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — NA PRÁTICA -->
+<div class="slide bg-bone">
+  <div class="grain"></div>
+  <div class="amp-bg" style="font-size:760px; bottom:-220px; left:-220px;">&amp;</div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="counter on-bone">04/05</div>
+  <div class="content" style="top: 460px;">
+    <div class="kicker-pill on-bone"><span class="kicker on-bone">NA PRÁTICA</span></div>
+    <div class="regua on-bone"></div>
+    <h2 class="h2 on-bone">Como aparecer</h2>
+    <div class="body-text on-bone">Conteúdo claro, direto, com dado real. A IA generativa cita quem <span class="hl-violet">responde bem a pergunta</span>, não quem só otimizou palavra-chave.</div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — CTA FINAL -->
+<div class="slide bg-accent">
+  <div class="grain"></div>
+  <div class="glow" style="width:760px; height:760px; top:-260px; right:160px; background:rgba(26,23,20,0.10);"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&Co">
+  <div class="counter on-accent">05/05</div>
+  <div class="center-box">
+    <img class="cta-logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
+    <div class="cta-headline">Quero aparecer</div>
+    <div class="cta-handle-pill">@jone.andco</div>
+  </div>
+</div>
+
+</body>
+</html>

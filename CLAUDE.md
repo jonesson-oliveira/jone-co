@@ -170,7 +170,7 @@ Quando o usuário pedir skill nova:
 
 **O que é esse workspace:** Operação da Jone&Co — consultoria de Marketing Digital e IA on demand. Aqui produz conteúdo, constrói o site, gerencia campanhas e documenta clientes.
 
-**Quem sou:** Jonesson Oliveira, 14 anos de Marketing Digital com foco em SEO. Trabalhei em BTG Pactual, Neon, Mercado Bitcoin, C6 Bank e Nio. Agora solo na Jone&Co — entrego marketing e IA sob medida, sem agência no meio.
+**Quem sou:** Jonesson Oliveira, 14 anos de Marketing Digital com foco em SEO. Passei por BTG Pactual, Neon, Mercado Bitcoin e C6 Bank; atualmente na Nio. A Jone&Co é negócio secundário por enquanto — entrego marketing e IA sob medida, sem agência no meio, pra quem contrata fora do meu expediente.
 
 **O que produzo:**
 - Conteúdo de SEO e marketing digital (carrosséis, artigos, posts)

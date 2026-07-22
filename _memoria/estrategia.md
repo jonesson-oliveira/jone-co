@@ -23,10 +23,23 @@ Gerar primeiros clientes. O desbloqueador do site foi resolvido.
 **Entregue:** meta robots, X-Robots-Tag, hreflang, datas OG, sitemap (dedup), llms.txt (Markdown), GTM-N5Z5XJ9H, preload CSS, contraste WCAG, CLS hero-mark, h4→p footer
 
 **Pendente:**
-- Foto em `public/img/jonesson.jpg` (placeholder ativo em /sobre e 4 LPs)
+- Foto em `public/img/jonesson.jpg` (placeholder ativo em /sobre e 4 LPs) — mesma sessão serve pro Instagram
 - Primeiro post do blog
 - Calendly link
 - og:image por LP
+
+## Instagram (Jone&Co)
+
+Conta separada da pessoal — chefe e colegas da Nio seguem a pessoal, e a Jone&Co é negócio secundário por enquanto, então discrição importa.
+
+**Handle:** @jone.andco
+**Nome de exibição:** Jonesson Oliveira · Jone&Co
+**Bio:** definida (tom humor seco, sem citar Nio — emprego atual)
+**Privacidade:** sincronizar contatos e sugestão de conta pra outros desativados
+
+**Pendente:**
+- Foto de perfil (mesma da pendência do site)
+- 3-4 posts prontos antes do primeiro publicado
 
 ## O que pode esperar
 
