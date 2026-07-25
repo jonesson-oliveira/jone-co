@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Editor de Carrossel — Jone&amp;Co</title>
+<link rel="stylesheet" href="/__editor/editor.css">
+</head>
+<body>
+
+<div id="app">
+  <aside id="sidebar">
+    <h1>Editor de carrossel</h1>
+
+    <div class="secao">
+      <label>Post</label>
+      <select id="post-select"></select>
+    </div>
+
+    <div class="secao">
+      <label>Slides</label>
+      <div id="slide-list"></div>
+    </div>
+
+    <div class="secao">
+      <label>Legenda (Instagram + Facebook)</label>
+      <textarea id="legenda-text" rows="10"></textarea>
+      <button id="btn-save-legenda">Salvar legenda</button>
+      <span id="legenda-msg"></span>
+    </div>
+
+    <div class="secao">
+      <label>Agendamento</label>
+      <div id="agenda-status-atual"></div>
+      <input type="datetime-local" id="agenda-datetime">
+      <button id="btn-agendar">Agendar publicação automática</button>
+      <button id="btn-cancelar-agendamento" style="display:none;">Cancelar agendamento</button>
+      <span id="agenda-msg"></span>
+    </div>
+
+    <div class="secao">
+      <label>Como usar</label>
+      <ul class="ajuda">
+        <li>Clique num elemento pra selecionar</li>
+        <li>Shift+clique pra somar/tirar da seleção</li>
+        <li>Arraste num espaço vazio pra selecionar por laço</li>
+        <li>Ctrl+A seleciona tudo do slide atual</li>
+        <li>Arraste pra mover (o grupo todo, se tiver mais de um selecionado)</li>
+        <li>Arraste o quadrado no canto pra redimensionar</li>
+        <li>Duplo clique num texto pra editar</li>
+        <li>Clique numa imagem selecionada pra trocar o arquivo</li>
+        <li>Delete/Backspace exclui a seleção</li>
+        <li>Ctrl+Z / Ctrl+Y desfaz / refaz</li>
+      </ul>
+    </div>
+
+    <div id="status"></div>
+  </aside>
+
+  <main id="canvas-area">
+    <div id="toolbar">
+      <button id="btn-undo" title="Ctrl+Z">↶ Desfazer</button>
+      <button id="btn-redo" title="Ctrl+Y">↷ Refazer</button>
+      <button id="btn-save">Salvar alterações</button>
+      <button id="btn-render">Renderizar PNGs</button>
+      <button id="btn-reload">Recarregar original</button>
+      <button id="btn-publish">Aprovar e Publicar</button>
+      <button id="btn-ver-agenda">📅 Agenda</button>
+      <span id="toolbar-msg"></span>
+    </div>
+    <div id="agenda-panel"></div>
+    <div id="preview-strip"></div>
+    <div id="publish-log"></div>
+    <div id="iframe-wrap">
+      <div id="iframe-stage">
+        <iframe id="slide-frame"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <aside id="right-panel">
+    <div class="secao">
+      <label>Zoom</label>
+      <select id="zoom-select">
+        <option value="0.35">35%</option>
+        <option value="0.5" selected>50%</option>
+        <option value="0.65">65%</option>
+        <option value="0.8">80%</option>
+        <option value="1">100%</option>
+      </select>
+    </div>
+
+    <div class="secao">
+      <label>Formas</label>
+      <div class="formas-grid">
+        <button class="btn-forma" data-shape="retangulo"><span class="forma-icone">▭</span>Retângulo</button>
+        <button class="btn-forma" data-shape="circulo"><span class="forma-icone">●</span>Círculo</button>
+        <button class="btn-forma" data-shape="linha"><span class="forma-icone">—</span>Linha</button>
+      </div>
+    </div>
+
+    <div class="secao" id="propriedades-secao" style="display:none;">
+      <label>Propriedades — <span id="prop-tag"></span></label>
+
+      <div class="prop-bloco">
+        <span class="prop-label">Cor do texto</span>
+        <div class="swatch-row" id="swatches-texto"></div>
+      </div>
+
+      <div class="prop-bloco" id="bloco-fundo">
+        <span class="prop-label">Cor de fundo</span>
+        <div class="swatch-row" id="swatches-fundo"></div>
+        <button id="btn-fundo-transparente">Fundo transparente</button>
+      </div>
+
+      <div class="prop-bloco" id="bloco-posicao">
+        <span class="prop-label">Posição e tamanho</span>
+        <div class="prop-grid">
+          <label>X <input type="number" id="prop-x"></label>
+          <label>Y <input type="number" id="prop-y"></label>
+          <label>Larg. <input type="number" id="prop-w"></label>
+          <label>Alt. <input type="number" id="prop-h"></label>
+        </div>
+      </div>
+
+      <button id="btn-excluir-elemento">Excluir elemento</button>
+    </div>
+  </aside>
+</div>
+
+<script src="/__editor/editor.js"></script>
+</body>
+</html>

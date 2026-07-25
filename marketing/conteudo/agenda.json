@@ -1,0 +1,41 @@
+[
+  {
+    "folder": "Jone&Co/marketing/conteudo/carrossel-apresentacao-jone-co-2026-07-22",
+    "scheduledFor": "2026-07-25T00:50:00.000Z",
+    "status": "publicado",
+    "createdAt": "2026-07-25T00:46:17.170Z",
+    "resultado": {
+      "ok": true,
+      "publishedAt": "2026-07-25T00:52:04.074Z",
+      "instagramLink": "https://www.instagram.com/p/DbMkb3ombiD/",
+      "facebookLink": "https://facebook.com/1165908859947228_122099793303405990",
+      "facebookFailed": false,
+      "steps": [
+        {
+          "nome": "Copiar imagens pro site",
+          "ok": true
+        },
+        {
+          "nome": "Deploy do site (wrangler)",
+          "ok": true,
+          "log": "⛅️ wrangler 4.101.0\n────────────────────\n🌀 Building list of assets...\n✨ Read 51 files from the assets directory C:\\Users\\jones\\OneDrive\\Documentos\\ProjetosClaude\\JoneAndCo-Site\\public\n🌀 Starting asset upload...\nNo updated asset files to upload. Proceeding with deployment...\nTotal Upload: 505.24 KiB / gzip: 104.94 KiB\nWorker Startup Time: 13 ms\nYour Worker has access to the following bindings:\nBinding                                               Resource                  \nenv.CACHE (f3e56c2c796b40c485df8fb6cced0f09)          KV Namespace              \nenv.DB (joneandco)                                    D1 Database               \nenv.ASSETS                                            Assets                    \nenv.SITE_URL (\"https://joneandco.com.br\")             Environment Variable      \nenv.SITE_NAME (\"Jone&Co\")                             Environment Variable      \n\nUploaded joneandco-site (17.47 sec)\nDeployed joneandco-site triggers (10.03 sec)\n  joneandco.com.br/* (zone name: joneandco.com.br)\n  www.joneandco.com.br/* (zone name: joneandco.com.br)\nCurrent Version ID: 51946380-26a4-4b70-8f0e-616de824437e"
+        },
+        {
+          "nome": "Confirmar imagem pública",
+          "ok": true,
+          "log": "https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-01.png"
+        },
+        {
+          "nome": "Publicar no Instagram",
+          "ok": true,
+          "log": "Publicando carrossel \"apresentacao-jone-co\" (5 slides) na conta Instagram 17841413498255805...\n  Enviando slide-01.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-01.png)...\n  Enviando slide-02.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-02.png)...\n  Enviando slide-03.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-03.png)...\n  Enviando slide-04.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-04.png)...\n  Enviando slide-05.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-05.png)...\n  Criando container do carrossel...\n  Aguardando o carrossel terminar de processar...\n  Publicando...\n\n✓ Publicado no Instagram\n  post id: 18110013818319541\n  link: https://www.instagram.com/p/DbMkb3ombiD/"
+        },
+        {
+          "nome": "Publicar no Facebook",
+          "ok": true,
+          "log": "Publicando carrossel \"apresentacao-jone-co\" (5 slides) na Página do Facebook 1165908859947228...\n  Enviando slide-01.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-01.png)...\n  Enviando slide-02.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-02.png)...\n  Enviando slide-03.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-03.png)...\n  Enviando slide-04.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-04.png)...\n  Enviando slide-05.png (https://joneandco.com.br/img/posts/apresentacao-jone-co/slide-05.png)...\n  Publicando post...\n\n✓ Publicado no Facebook\n  post id: 1165908859947228_122099793303405990\n  link: https://facebook.com/1165908859947228_122099793303405990"
+        }
+      ]
+    }
+  }
+]
