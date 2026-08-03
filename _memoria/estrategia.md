@@ -23,7 +23,6 @@ Gerar primeiros clientes. O desbloqueador do site foi resolvido.
 **Entregue:** meta robots, X-Robots-Tag, hreflang, datas OG, sitemap (dedup), llms.txt (Markdown), GTM-N5Z5XJ9H, preload CSS, contraste WCAG, CLS hero-mark, h4→p footer
 
 **Pendente:**
-- Foto em `public/img/jonesson.jpg` (placeholder ativo em /sobre e 4 LPs) — mesma sessão serve pro Instagram
 - Primeiro post do blog
 - Calendly link
 - og:image por LP
@@ -38,7 +37,7 @@ Conta separada da pessoal — chefe e colegas da Nio seguem a pessoal, e a Jone&
 **Privacidade:** sincronizar contatos e sugestão de conta pra outros desativados
 
 **Pendente:**
-- Foto de perfil (mesma da pendência do site)
+- Foto de perfil (foto já disponível em `identidade/jonesson-foto.webp`, publicada no site em 03/08; falta só trocar no Instagram)
 
 **Feito (2026-07-22):** 4 carrosséis prontos em `marketing/conteudo/` (posicionamento, apresentação, mito-seo, geo-ia) — resolve a pendência de "3-4 posts prontos". Todos no padrão visual v2 (ver `identidade/design-guide.md` — kicker "└", marca `mark-lime.svg` como device gráfico, mockups de terminal/UI reaproveitados do site, logos reais de clientes como prova). Gerados via HTML/Playwright, não Canva.
 

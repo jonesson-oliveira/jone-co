@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "publishedAt": "2026-08-03T15:20:47.504Z",
+  "instagramLink": "https://www.instagram.com/p/DblTA3NESxo/",
+  "facebookLink": "https://facebook.com/1165908859947228_122103806871405990",
+  "facebookFailed": false,
+  "steps": [
+    {
+      "nome": "Copiar imagens pro site",
+      "ok": true
+    },
+    {
+      "nome": "Deploy do site (wrangler)",
+      "ok": true,
+      "log": "⛅️ wrangler 4.101.0 (update available 4.118.0)\n───────────────────────────────────────────────\n🌀 Building list of assets...\n✨ Read 58 files from the assets directory C:\\Users\\jones\\OneDrive\\Documentos\\ProjetosClaude\\JoneAndCo-Site\\public\n🌀 Starting asset upload...\n🌀 Found 5 new or modified static assets to upload. Proceeding with upload...\n+ /img/posts/search-console-social/slide-03.png\n+ /img/posts/search-console-social/slide-05.png\n+ /img/posts/search-console-social/slide-02.png\n+ /img/posts/search-console-social/slide-01.png\n+ /img/posts/search-console-social/slide-04.png\nUploaded 1 of 5 assets\nUploaded 3 of 5 assets\nUploaded 5 of 5 assets\n✨ Success! Uploaded 5 files (43 already uploaded) (1.80 sec)\n\nTotal Upload: 502.81 KiB / gzip: 104.30 KiB\nWorker Startup Time: 23 ms\nYour Worker has access to the following bindings:\nBinding                                               Resource                  \nenv.CACHE (f3e56c2c796b40c485df8fb6cced0f09)          KV Namespace              \nenv.DB (joneandco)                                    D1 Database               \nenv.ASSETS                                            Assets                    \nenv.SITE_URL (\"https://joneandco.com.br\")             Environment Variable      \nenv.SITE_NAME (\"Jone&Co\")                             Environment Variable      \n\nUploaded joneandco-site (18.86 sec)\nDeployed joneandco-site triggers (9.72 sec)\n  joneandco.com.br/* (zone name: joneandco.com.br)\n  www.joneandco.com.br/* (zone name: joneandco.com.br)\nCurrent Version ID: ad4abc74-178c-47b2-b0bd-7eceb4d6dfc3"
+    },
+    {
+      "nome": "Confirmar imagem pública",
+      "ok": true,
+      "log": "https://joneandco.com.br/img/posts/search-console-social/slide-01.png"
+    },
+    {
+      "nome": "Publicar no Instagram",
+      "ok": true,
+      "log": "Publicando carrossel \"search-console-social\" (5 slides) na conta Instagram 17841413498255805...\n  Enviando slide-01.png (https://joneandco.com.br/img/posts/search-console-social/slide-01.png)...\n  Enviando slide-02.png (https://joneandco.com.br/img/posts/search-console-social/slide-02.png)...\n  Enviando slide-03.png (https://joneandco.com.br/img/posts/search-console-social/slide-03.png)...\n  Enviando slide-04.png (https://joneandco.com.br/img/posts/search-console-social/slide-04.png)...\n  Enviando slide-05.png (https://joneandco.com.br/img/posts/search-console-social/slide-05.png)...\n  Criando container do carrossel...\n  Aguardando o carrossel terminar de processar...\n  Publicando...\n\n✓ Publicado no Instagram\n  post id: 18090951065416105\n  link: https://www.instagram.com/p/DblTA3NESxo/"
+    },
+    {
+      "nome": "Publicar no Facebook",
+      "ok": true,
+      "log": "Publicando carrossel \"search-console-social\" (5 slides) na Página do Facebook 1165908859947228...\n  Enviando slide-01.png (https://joneandco.com.br/img/posts/search-console-social/slide-01.png)...\n  Enviando slide-02.png (https://joneandco.com.br/img/posts/search-console-social/slide-02.png)...\n  Enviando slide-03.png (https://joneandco.com.br/img/posts/search-console-social/slide-03.png)...\n  Enviando slide-04.png (https://joneandco.com.br/img/posts/search-console-social/slide-04.png)...\n  Enviando slide-05.png (https://joneandco.com.br/img/posts/search-console-social/slide-05.png)...\n  Publicando post...\n\n✓ Publicado no Facebook\n  post id: 1165908859947228_122103806871405990\n  link: https://facebook.com/1165908859947228_122103806871405990"
+    }
+  ]
+}

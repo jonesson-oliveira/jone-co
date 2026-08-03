@@ -37,5 +37,17 @@
         }
       ]
     }
+  },
+  {
+    "folder": "Jone&Co/marketing/conteudo/carrossel-geo-ia-2026-07-22",
+    "scheduledFor": "2026-08-04T15:00:00.000Z",
+    "status": "agendado",
+    "createdAt": "2026-08-03T15:22:20.695Z"
+  },
+  {
+    "folder": "Jone&Co/marketing/conteudo/carrossel-mito-seo-2026-07-22",
+    "scheduledFor": "2026-08-05T15:20:00.000Z",
+    "status": "agendado",
+    "createdAt": "2026-08-03T15:24:47.423Z"
   }
 ]

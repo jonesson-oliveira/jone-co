@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
-<title>Jone&amp;Co — Carrossel Mito de SEO</title>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Fraunces:ital,wght@1,500&amp;display=swap" rel="stylesheet">
+<title>Jone&amp;Co — Carrossel Search Console Social</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --lime: #C6F24B; --violet: #7C5CFF; --dark: #0E1116; --bone: #F2EFE9;
-    --text: #E8ECF1; --muted: #8A93A0; --stone: #6B6258; --ink: #1A1714;
+    --lime: #C6F24B; --violet: #7C5CFF; --surface: #1B222C; --surface-2: #161C24;
+    --dark: #0E1116; --bone: #F2EFE9; --text: #E8ECF1; --muted: #8A93A0;
+    --stone: #6B6258; --ink: #1A1714; --line: #2A323D; --red: #f87171;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #444; }
@@ -36,7 +38,7 @@
   .regua.on-dark   { background: var(--lime); }
   .regua.on-accent { background: var(--ink); }
   .content { position: absolute; left: 70px; right: 70px; z-index: 2; }
-  h1.title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 72px; line-height: 1.0; letter-spacing: -0.04em; text-transform: uppercase; }
+  h1.title { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 66px; line-height: 1.04; letter-spacing: -0.035em; text-transform: uppercase; }
   h1.title.on-accent { color: var(--ink); }
   h2.h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 58px; line-height: 1.04; letter-spacing: -0.04em; text-transform: uppercase; }
   .h2.on-dark   { color: var(--text); }
@@ -48,12 +50,6 @@
   .body-text.on-accent { color: rgba(26,23,20,0.72); }
   .hl-lime   { color: var(--lime); font-weight: 700; }
   .hl-violet { color: var(--violet); font-weight: 700; }
-  .tag-pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 40px; padding: 10px 20px; border-radius: 100px;
-    font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600;
-  }
-  .tag-pill.on-accent { background: rgba(26,23,20,0.08); color: var(--ink); border: 1px solid rgba(26,23,20,0.18); }
   .footer-bar { position: absolute; bottom: 64px; left: 70px; right: 70px; z-index: 3; display: flex; justify-content: space-between; align-items: center; font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
   .footer-bar.on-dark   { color: var(--text); }
   .footer-bar.on-accent { color: var(--ink); }
@@ -66,82 +62,117 @@
   .signature { display: flex; align-items: center; gap: 22px; }
   .signature-list { display: flex; flex-direction: column; gap: 8px; }
   .signature-list p { font-family: 'Space Grotesk', sans-serif; font-size: 23px; font-weight: 600; letter-spacing: -0.01em; }
+  .numeral { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 260px; line-height: 0.85; letter-spacing: -0.04em; color: var(--violet); margin: 4px 0 14px; }
+
+  /* ---- Terminal mockup (reaproveitado do site) ---- */
+  .terminal { position: relative; z-index: 2; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: 0 0 80px rgba(198,242,75,0.10); }
+  .terminal-tabs { display: flex; background: var(--surface-2); border-bottom: 1px solid var(--line); padding: 0 6px; }
+  .terminal-tab { display: flex; align-items: center; gap: 9px; padding: 18px 24px; font-family: 'JetBrains Mono', monospace; font-size: 17px; color: var(--muted); border-bottom: 3px solid transparent; }
+  .terminal-tab.is-active { color: var(--text); }
+  .terminal-tab.is-active.red  { border-bottom-color: var(--red); color: #ffb3ab; }
+  .terminal-tab.is-active.lime { border-bottom-color: var(--lime); }
+  .tab-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .tab-dot.red  { background: var(--red); }
+  .tab-dot.lime { background: var(--lime); }
+  .terminal-panel { padding: 30px 38px 34px; }
+  .panel-label { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 18px; }
+  .panel-label.lime { color: var(--lime); }
+  .boot-line { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 18px; }
+  .boot-line:last-child { border-bottom: none; }
+  .boot-arrow { color: var(--violet); flex-shrink: 0; }
+  .boot-text  { color: var(--text); }
+  .boot-ok    { color: var(--lime); flex-shrink: 0; margin-left: auto; }
 </style>
 </head>
 <body>
 
-<!-- SLIDE 1 — CAPA (bone) -->
-<div class="slide bg-bone" style="color: rgb(138, 147, 160); background-color: rgb(198, 242, 75);">
+<!-- SLIDE 1 — CAPA (accent/lime) -->
+<div class="slide bg-accent">
   <div class="grain"></div>
   <div class="scanlines"></div>
-  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="top:-170px; right:-110px; height:920px; width:auto; filter:brightness(0); opacity:0.06;" alt="">
+  <img class="ghost-amp" src="../../../identidade/JoneAndCo-mark-lime.svg" style="top:-170px; right:-110px; height:920px; width:auto; filter:brightness(0); opacity:0.08;" alt="">
   <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
   <div class="counter on-accent">01/05</div>
-  <div class="content" style="top: 460px;">
-    <div class="kicker on-accent">└ JONE&amp;CO</div>
+  <div class="content" style="top: 440px;">
+    <div class="kicker on-accent">&#9492; JONE&amp;CO</div>
     <div class="regua on-accent"></div>
-    <h1 class="title on-accent">SEO não é<br>palavra-chave.<br>Pare de tratar<br>assim.</h1>
-    <div class="subtitle on-accent">3 mitos que ainda travam sua estratégia</div>
+    <h1 class="title on-accent">Google abriu<br>o dado que<br>faltava</h1>
+    <div class="subtitle on-accent">Search Console agora mostra as buscas que levam gente até seus posts</div>
   </div>
   <div class="dots">
     <div class="dot on-accent active"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div>
   </div>
-  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste →</span></div>
+  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
-<!-- SLIDE 2 — MITO 1 (dark) -->
+<!-- SLIDE 2 — O QUE MUDOU (dark) — terminal mockup antes/agora -->
 <div class="slide bg-dark">
   <div class="grain"></div>
   <div class="scanlines on-dark"></div>
   <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
   <div class="counter on-dark">02/05</div>
-  <div class="content" style="top: 480px;">
-    <div class="kicker on-dark">└ MITO 1</div>
+  <div class="content" style="top: 190px;">
+    <div class="kicker on-dark">&#9492; O QUE MUDOU</div>
     <div class="regua on-dark"></div>
-    <h2 class="h2 on-dark">Mais conteúdo é<br>sempre melhor</h2>
-    <div class="body-text on-dark">Não é quantidade, é <span class="hl-lime">relevância</span>. Vinte posts genéricos perdem pra dois que realmente respondem o que o cliente busca.</div>
+    <h2 class="h2 on-dark">Sua rede social<br>entrou no Search<br>Console</h2>
+  </div>
+  <div class="content" style="top: 620px;">
+    <div class="terminal">
+      <div class="terminal-tabs">
+        <div class="terminal-tab"><span class="tab-dot red"></span>Antes</div>
+        <div class="terminal-tab is-active lime"><span class="tab-dot lime"></span>Agora</div>
+      </div>
+      <div class="terminal-panel">
+        <div class="panel-label lime">conectado ao search console</div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">Instagram</span><span class="boot-ok">&#10003;</span></div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">TikTok</span><span class="boot-ok">&#10003;</span></div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">X (Twitter)</span><span class="boot-ok">&#10003;</span></div>
+        <div class="boot-line"><span class="boot-arrow">&#9656;</span><span class="boot-text">YouTube</span><span class="boot-ok">&#10003;</span></div>
+      </div>
+    </div>
+    <div class="body-text">Antes você postava e não sabia por quê. <span class="hl-lime">Agora vê a busca real que levou alguém até o vídeo.</span></div>
   </div>
   <div class="dots">
     <div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div>
   </div>
-  <div class="footer-bar on-dark"><span>@jone.andco</span><span>Arraste →</span></div>
+  <div class="footer-bar on-dark"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
-<!-- SLIDE 3 — MITO 2 (accent) -->
-<div class="slide bg-accent">
-  <div class="grain"></div>
-  <div class="scanlines"></div>
-  <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
-  <div class="counter on-accent">03/05</div>
-  <div class="content" style="top: 480px;">
-    <div class="kicker on-accent">└ MITO 2</div>
-    <div class="regua on-accent"></div>
-    <h2 class="h2 on-accent">Meta description<br>não importa</h2>
-    <div class="body-text on-accent">Ela não pesa direto no ranqueamento, mas decide se alguém clica no seu link ou no do concorrente. <span class="hl-violet">Ignorar isso é jogar tráfego fora.</span></div>
-  </div>
-  <div class="dots">
-    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div><div class="dot on-accent"></div><div class="dot on-accent"></div>
-  </div>
-  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste →</span></div>
-</div>
-
-<!-- SLIDE 4 — MITO 3 (bone) -->
+<!-- SLIDE 3 — O NÚMERO (bone) -->
 <div class="slide bg-bone">
   <div class="grain"></div>
   <div class="scanlines"></div>
   <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
-  <div class="counter on-accent">04/05</div>
-  <div class="content" style="top: 480px;">
-    <div class="kicker on-accent">└ MITO 3</div>
+  <div class="counter on-accent">03/05</div>
+  <div class="content" style="top: 300px;">
+    <div class="kicker on-accent">&#9492; O NÚMERO</div>
+    <div class="numeral">4</div>
     <div class="regua on-accent"></div>
-    <h2 class="h2 on-accent">SEO é só<br>pro Google</h2>
-    <div class="body-text on-accent">Hoje tem gente perguntando pro ChatGPT antes de pesquisar no Google. <span class="hl-violet">Se sua marca não aparece lá, o mito não é seu.</span></div>
-    <div class="tag-pill on-accent">● ChatGPT · Gemini · Perplexity</div>
+    <h2 class="h2 on-accent">Plataformas caindo<br>no mesmo relatório</h2>
+    <div class="body-text on-accent">Search, Discover e Google News cruzados com Instagram, TikTok, X e YouTube. <span class="hl-violet">Um painel só.</span></div>
   </div>
   <div class="dots">
-    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div><div class="dot on-accent"></div>
+    <div class="dot on-accent"></div><div class="dot on-accent"></div><div class="dot on-accent active"></div><div class="dot on-accent"></div><div class="dot on-accent"></div>
   </div>
-  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste →</span></div>
+  <div class="footer-bar on-accent"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
+</div>
+
+<!-- SLIDE 4 — PRA QUE SERVE (dark) -->
+<div class="slide bg-dark">
+  <div class="grain"></div>
+  <div class="scanlines on-dark"></div>
+  <img class="logo" src="../../../identidade/JoneAndCo-logo-dark.svg" alt="Jone&amp;Co">
+  <div class="counter on-dark">04/05</div>
+  <div class="content" style="top: 480px;">
+    <div class="kicker on-dark">&#9492; PRA QUE SERVE</div>
+    <div class="regua on-dark"></div>
+    <h2 class="h2 on-dark">Você para de<br>chutar título<br>de post</h2>
+    <div class="body-text on-dark">Vê a busca real que trouxe visualização pro seu Reels ou vídeo. Testa gancho, olha o dado, ajusta. <span class="hl-lime">Sem achismo.</span></div>
+  </div>
+  <div class="dots">
+    <div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark"></div><div class="dot on-dark active"></div><div class="dot on-dark"></div>
+  </div>
+  <div class="footer-bar on-dark"><span>@jone.andco</span><span>Arraste &rarr;</span></div>
 </div>
 
 <!-- SLIDE 5 — CTA FINAL (accent) -->
@@ -151,8 +182,8 @@
   <img class="logo" src="../../../identidade/JoneAndCo-logo-light.svg" alt="Jone&amp;Co">
   <div class="counter on-accent">05/05</div>
   <div style="position:absolute; left:0; right:0; top:310px; text-align:center; z-index:2;">
-    <div class="kicker on-accent" style="justify-content:center; display:flex;">└ JONE&amp;CO</div>
-    <div style="font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:80px; letter-spacing:-0.045em; text-transform:uppercase; color:var(--ink); margin-top:26px;">Bora corrigir isso?</div>
+    <div class="kicker on-accent" style="justify-content:center; display:flex;">&#9492; JONE&amp;CO</div>
+    <div style="font-family:'Space Grotesk', sans-serif; font-weight:800; font-size:76px; letter-spacing:-0.045em; text-transform:uppercase; color:var(--ink); margin-top:26px;">Bora ver esses dados?</div>
     <div style="display:inline-flex; align-items:center; justify-content:center; margin-top:34px; padding:16px 34px; background:var(--ink); border-radius:100px; font-family:'JetBrains Mono', monospace; font-weight:600; font-size:22px; letter-spacing:0.05em; color:var(--lime);">@jone.andco</div>
   </div>
   <div class="signature" style="position:absolute; left:70px; right:70px; top:940px; z-index:2;">
@@ -169,7 +200,5 @@
   <div class="footer-bar on-accent"><span>joneandco.com.br</span><span>2026</span></div>
 </div>
 
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;39508e2247f349cda7408d58772f5311&quot;,&quot;r&quot;:1}" crossorigin="anonymous"></script>
-
-
-</body></html>
+</body>
+</html>
