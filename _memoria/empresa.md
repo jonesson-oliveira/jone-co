@@ -14,4 +14,4 @@
 Site no ar em joneandco.com.br (Cloudflare Workers + Hono, TypeScript SSR). Sem clientes ativos via Jone&Co ainda — fase de prospecção.
 Passagem por fintechs e grandes marcas confere autoridade e base de prova social forte.
 O "&" (ampersand) é o device central da marca — conecta marketing e IA, estratégia e execução.
-Jonesson também é criador e dono do **JoneOS**, SaaS de gestão pra lojas de veículos multimarcas (contexto em `../joneOS/_memoria/`). Marca e público são independentes da Jone&Co, mas o JoneOS serve como case/prova de entrega técnica em conteúdo e no site.
+Jonesson também é criador e dono do **CardealerOS**, SaaS de gestão pra lojas de veículos multimarcas (era chamado "JoneOS" antes do cutover pra Andra; contexto em `../CardealerOS/_memoria/`). Marca e público são independentes da Jone&Co, mas o CardealerOS serve como case/prova de entrega técnica em conteúdo e no site. **"JoneOS" hoje é outro projeto**: o console operacional da própria Jone&Co (`../JoneOS/`), sem relação com o CardealerOS.
